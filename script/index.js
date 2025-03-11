@@ -7,7 +7,6 @@ function loadCategories() {
     //send data to display
     .then((data) => showCategories(data.categories));
 }
-loadCategories();
 
 function showCategories(categories) {
   const categoryContainer = document.getElementById("category-container");
@@ -16,7 +15,7 @@ function showCategories(categories) {
     // console.log(cat.category);
     const categoryDiv = document.createElement("div");
     categoryDiv.innerHTML = `
-    <button class="btn btn-sm hover:bg-red-500 hover:text-white">${cat.category}</button>
+    <button onclick="loadVideosByCategory(${cat.category_id})" class="btn btn-sm hover:bg-red-500 hover:text-white">${cat.category}</button>
     `;
     categoryContainer.append(categoryDiv);
   }
@@ -24,6 +23,8 @@ function showCategories(categories) {
 
   //   console.log(categories);
 }
+
+loadCategories();
 
 // ? Fetching videos
 
@@ -33,10 +34,18 @@ function loadVideos() {
     .then((vid) => showVideos(vid.videos));
 }
 
-loadVideos();
+//? Load videos by category
+function loadVideosByCategory(id) {
+  let urls = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
+  //   console.log(urls);
+  fetch(urls)
+    .then((response) => response.json())
+    .then((data) => showVideos(data.category));
+}
 
 const showVideos = (video) => {
   const videoContainer = document.getElementById("video-container");
+  videoContainer.innerHTML = "";
   video.forEach((vids) => {
     // console.log(vids);
     const videoCard = document.createElement("div");
@@ -65,7 +74,7 @@ const showVideos = (video) => {
       </div>
 
       <h2 class="card-title">
-        Building a Winning UX Strategy Using the Kano Model
+        ${vids.title}
       </h2>
     </div>
     <div class="mt-4 space-y-4">
