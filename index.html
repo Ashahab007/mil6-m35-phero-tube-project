@@ -15,10 +15,10 @@
   <body>
     <header>
       <nav
-        class="w-11/12 mx-auto flex justify-between items-center border-b-2 py-5"
+        class="w-11/12 mx-auto flex justify-between items-center border-b-2 border-[#1717172d] py-5"
       >
         <div>
-          <img src="./assets/Logo.png" alt="" srcset="" />
+          <img class="w-[120px]" src="./assets/Logo.png" alt="" srcset="" />
         </div>
         <div>
           <button class="btn btn-soft">Sort By View</button>
@@ -28,5 +28,12 @@
         </div>
       </nav>
     </header>
+    <nav
+      id="category-container"
+      class="flex justify-center items-center py-5 gap-5"
+    >
+      <button class="btn btn-sm bg-red-500 text-white">All</button>
+    </nav>
+    <script src="./script/index.js"></script>
   </body>
 </html>
