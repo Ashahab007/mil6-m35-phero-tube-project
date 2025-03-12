@@ -5,17 +5,21 @@ function loadCategories() {
     //convert promise to json
     .then((response) => response.json())
     //send data to display
-    .then((data) => showCategories(data.categories));
+    .then(
+      (data) => showCategories(data.categories)
+      // console.log(data.categories)
+    );
 }
 
 function showCategories(categories) {
   const categoryContainer = document.getElementById("category-container");
 
   for (const cat of categories) {
-    // console.log(cat.category);
+    console.log(cat.category);
     const categoryDiv = document.createElement("div");
+
     categoryDiv.innerHTML = `
-    <button onclick="loadVideosByCategory(${cat.category_id})" class="btn btn-sm hover:bg-red-500 hover:text-white">${cat.category}</button>
+    <button id="btn-${cat.category_id}" onclick="loadVideosByCategory(${cat.category_id})" class="btn btn-sm hover:bg-red-500 hover:text-white">${cat.category}</button>
     `;
     categoryContainer.append(categoryDiv);
   }
@@ -29,25 +33,55 @@ loadCategories();
 // ? Fetching videos
 
 function loadVideos() {
-  fetch("https://openapi.programming-hero.com/api/phero-tube/videos#")
+  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then((response) => response.json())
-    .then((vid) => showVideos(vid.videos));
+    .then(
+      (vid) => showVideos(vid.videos)
+
+      // console.log(vid.videos)
+    );
 }
 
 //? Load videos by category
 function loadVideosByCategory(id) {
   let urls = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
-  //   console.log(urls);
+  console.log(urls);
   fetch(urls)
     .then((response) => response.json())
-    .then((data) => showVideos(data.category));
+    .then(
+      (data) => {
+        let clickedBtn = document.getElementById(`btn-${id}`);
+        clickedBtn.classList.add("active");
+        console.log(clickedBtn);
+
+        showVideos(data.category);
+      }
+
+      // console.log(data.category)
+    );
 }
 
 const showVideos = (video) => {
   const videoContainer = document.getElementById("video-container");
+  console.log(video.length);
+  // Showing default pictures in drawing button
+  if (video.length == 0) {
+    videoContainer.innerHTML = `
+    <div
+        class="flex flex-col gap-8 justify-center items-center col-span-full mt-24"
+      >
+        <img class="w-40 h-40" src="./assets/Icon.png" alt="" srcset="" />
+        <h1 class="text-2xl font-bold">
+          Oops!! Sorry, There is no content here
+        </h1>
+      </div>
+    `;
+    return;
+  }
+
   videoContainer.innerHTML = "";
   video.forEach((vids) => {
-    // console.log(vids);
+    console.log(vids);
     const videoCard = document.createElement("div");
     videoCard.innerHTML = `
     <div class="card bg-base-100 shadow-sm">
