@@ -11,16 +11,6 @@ function loadCategories() {
     );
 }
 
-// Remove active class from clicked button
-function removeActiveClass() {
-  let activeButtons = document.getElementsByClassName("active");
-  for (const btn of activeButtons) {
-    console.log(btn);
-
-    btn.classList.remove("active");
-  }
-}
-
 function showCategories(categories) {
   const categoryContainer = document.getElementById("category-container");
 
@@ -39,6 +29,16 @@ function showCategories(categories) {
 }
 
 loadCategories();
+
+// Remove active class from clicked button
+function removeActiveClass() {
+  let activeButtons = document.getElementsByClassName("active");
+  for (const btn of activeButtons) {
+    console.log(btn);
+
+    btn.classList.remove("active");
+  }
+}
 
 // ? Fetching videos
 
