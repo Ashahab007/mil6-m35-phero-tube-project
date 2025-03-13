@@ -132,12 +132,16 @@ const showVideos = (video) => {
       <p class="flex gap-4 items-center">
         ${vids.authors[0].profile_name}
         <span
-          ><img
+          >${
+            vids.authors[0].verified === true
+              ? `<img
             class="w-4 h-4"
             src="https://img.icons8.com/?size=48&id=SRJUuaAShjVD&format=png"
             alt=""
             srcset=""
-        /></span>
+        />`
+              : ""
+          }</span>
       </p>
       <p>${vids.others.views} Views</p>
     </div>
