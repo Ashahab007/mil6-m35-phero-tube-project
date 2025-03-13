@@ -145,8 +145,22 @@ const showVideos = (video) => {
       </p>
       <p>${vids.others.views} Views</p>
     </div>
+    <button onclick=loadVideoDetails(${
+      vids.video_id
+    }) class="btn btn-block">Show Details</button>
   </div>
     `;
     videoContainer.append(videoCard);
   });
 };
+
+const loadVideoDetails = (videoId) => {
+  let url = `https://openapi.programming-hero.com/api/phero-tube/videos/${videoId}`;
+  console.log(url);
+
+  /* fetch(url)
+    .then((response) => response.json())
+    .then((res) => console.log(res)); */
+};
+
+const showVideoDetails = () => {};
